@@ -95,8 +95,33 @@ function render(object) {
    document.querySelector("#humidityData").textContent = `${object.humidity}%`;
 
    document.querySelector("#windData").textContent = `${object.windspeed}km/h`;
+
+   changeBackground(object.icon);
 }
 
 function celsiusToFahrenheit(celsius) {
     return (celsius * 9/5) + 32;
+}
+
+function changeBackground(icon) {
+    const colors = {
+        "snow": "#E0F7FA",
+        "snow-showers-day": "#B3E5FC",
+        "snow-showers-night": "#283593",
+        "thunder-rain": "#424242",
+        "thunder-showers-day": "#607D8B",
+        "thunder-showers-night": "#1A237E",	
+        "rain": "#64B5F6",
+        "showers-day": "#90CAF9",
+        "showers-night": "#303F9F",
+        "fog": "#CFD8DC",
+        "wind": "#ECEFF1",
+        "cloudy": "#B0BEC5",	
+        "partly-cloudy-day": "#81D4FA",
+        "partly-cloudy-night": "#455A64",
+        "clear-day": "#29B6F6",
+        "clear-night": "#1C2833"
+    }
+
+    document.querySelector("body").style.backgroundColor = colors[`${icon}`];
 }
