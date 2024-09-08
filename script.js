@@ -52,6 +52,6 @@ function render(object) {
    temp.append(tempSpan);
 
    const locationSpan = document.createElement("span");
-   location.textContent = object.location;
+   locationSpan.textContent = object.location;
    location.append(locationSpan);
 }
