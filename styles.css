@@ -127,3 +127,25 @@ body {
     font-size: larger;
     align-self: center;
 }
+
+#unitContainer {
+    grid-column: 3/4;
+    grid-row: 2/3;
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#celsius, #fahren {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 10px;
+    color: grey;
+}
+
+.active {
+    color: white;
+    background-color: rgb(86, 86, 86);
+}

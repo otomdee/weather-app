@@ -1,3 +1,7 @@
+//unit tracker
+let currentUnit = "celsius";
+
+//fetch data async function
 async function fetchWeather(place) {
     try {
         const today = new Date();
@@ -26,8 +30,7 @@ async function fetchWeather(place) {
     }
 }
 
-//fetchweather is async so returns a promise
-
+//search and toggle unit listeners
 document.querySelector("#search").addEventListener("submit", e => {
     e.preventDefault();
     const searchTerm = document.querySelector("#searchBar").value;
@@ -35,8 +38,29 @@ document.querySelector("#search").addEventListener("submit", e => {
     weatherPromise.then(response => {
         render(response);
     });
+
+    //toggle unit function
+    document.querySelector("#celsius").addEventListener("click", () => {
+        currentUnit = "celsius";
+        weatherPromise.then(response => {
+            render(response);
+        });
+        document.querySelector("#celsius").classList.add("active");
+        document.querySelector("#fahren").classList.remove("active");
+        
+    });
+
+    document.querySelector("#fahren").addEventListener("click", () => {
+        currentUnit = "fahren";
+        weatherPromise.then(response => {
+            render(response);
+        });
+        document.querySelector("#fahren").classList.add("active");
+        document.querySelector("#celsius").classList.remove("active");
+    });
 })
 
+//render function
 function render(object) {
 
    const weatherIcon = document.querySelector("#weather-icon");
@@ -48,14 +72,20 @@ function render(object) {
     temp.innerHTML = "";
     location.innerHTML = "";
 
-
    const icon = document.createElement("img");
    icon.src = `./icons/${object.icon}.svg`;
    icon.classList.add("icon");
    weatherIcon.append(icon);
 
    const tempSpan = document.createElement("span");
-   tempSpan.textContent = `${object.temp}\u00B0c`;
+   if (currentUnit === "celsius") {
+    tempSpan.textContent = `${object.temp}\u00B0c`;
+   }
+   else {
+    const fahrenData = celsiusToFahrenheit(object.temp);
+    tempSpan.textContent = `${fahrenData}\u00B0F`;
+   }
+   
    temp.append(tempSpan);
 
    const locationSpan = document.createElement("span");
@@ -65,4 +95,8 @@ function render(object) {
    document.querySelector("#humidityData").textContent = `${object.humidity}%`;
 
    document.querySelector("#windData").textContent = `${object.windspeed}km/h`;
+}
+
+function celsiusToFahrenheit(celsius) {
+    return (celsius * 9/5) + 32;
 }
