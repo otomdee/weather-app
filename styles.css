@@ -30,6 +30,11 @@ body {
     align-items: center;
 }
 
+#search {
+    display: flex;
+    align-items: center;
+}
+
 #search > button {
     border-radius: 50%;
     border: none;
@@ -90,4 +95,35 @@ body {
     font-size: 25px;
     color: white;
     text-align: center;
+}
+
+.bottom {
+    grid-row: 4/5;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.bottomSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.bottomSection>svg {
+    height: 35px;
+    width: 35px;
+    justify-self: flex-end;
+    align-self: flex-end;
+}
+
+.humidityText, .windText {
+    color: white;
+    font-size: 10px;
+    grid-column: 2/3;
+}
+
+#humidityData, #windData {
+    color: white;
+    font-size: larger;
+    align-self: center;
 }
