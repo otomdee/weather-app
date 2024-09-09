@@ -33,10 +33,18 @@ async function fetchWeather(place) {
 //search and toggle unit listeners
 document.querySelector("#search").addEventListener("submit", e => {
     e.preventDefault();
+
+    document.querySelector("#loading").style.display = "block";
+
     const searchTerm = document.querySelector("#searchBar").value;
     const weatherPromise = fetchWeather(searchTerm);
     weatherPromise.then(response => {
         render(response);
+        document.querySelector("#loading").style.display = "none";
+         //show humidity and windspeed
+        document.querySelectorAll(".bottomSection").forEach((item) => {
+            item.classList.remove("hidden");
+        });
     });
 
     //toggle unit function
@@ -100,7 +108,7 @@ function render(object) {
 }
 
 function celsiusToFahrenheit(celsius) {
-    return (celsius * 9/5) + 32;
+    return ((celsius * 9/5) + 32).toFixed(1);
 }
 
 function changeBackground(icon) {
